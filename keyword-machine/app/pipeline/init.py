@@ -1,0 +1,2 @@
+
+all = ["collect", "analyze", "brief"]
