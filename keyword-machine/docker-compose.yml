@@ -1,0 +1,30 @@
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: km
+      POSTGRES_PASSWORD: km
+      POSTGRES_DB: km
+    ports:
+      - "5432:5432"
+    volumes:
+      - km_pg:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U km -d km"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  app:
+    build: .
+    depends_on:
+      db:
+        condition: service_healthy
+    env_file:
+      - .env
+    volumes:
+      - ./app:/app/app
+    command: ["bash", "-lc", "python -m app.main init && tail -f /dev/null"]
+
+volumes:
+  km_pg:
