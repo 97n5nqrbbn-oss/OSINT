@@ -1,0 +1,15 @@
+# OSINT Dependencies
+
+requests
+beautifulsoup4
+scikit-learn
+pandas
+numpy
+matplotlib
+seaborn
+scrapy
+pygments
+exifread
+whois
+ipwhois
+
